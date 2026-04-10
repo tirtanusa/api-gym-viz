@@ -31,8 +31,10 @@ class Exercise extends Model
         'deleted_at' => 'datetime',
     ];
 
-    public function exerciseDetails()
+    public function routines()
     {
-        return $this->hasMany(ExerciseDetail::class);
+        return $this->belongsToMany(Routine::class, 'exercise_details')
+            ->withPivot('repetitions', 'sets', 'rest_time')
+            ->withTimestamps();
     }
 }

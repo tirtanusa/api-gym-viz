@@ -8,59 +8,149 @@ use Illuminate\Database\Seeder;
 
 class ExerciseSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-         Exercise::insert([
+        $exercises = [
             [
                 'name' => 'Bench Press',
-                'description' => 'Chest strength exercise',
-                'muscle_group' => 'Chest',
+                'description' => 'Compound chest exercise',
+                'muscle_group' => [
+                    'chest' => 3,
+                    'triceps' => 2,
+                    'shoulders' => 1
+                ],
                 'equipment' => 'Barbell',
                 'video_url' => 'https://youtube.com/benchpress',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
+
+            [
+                'name' => 'Incline Dumbbell Press',
+                'description' => 'Upper chest focused press',
+                'muscle_group' => [
+                    'chest' => 3,
+                    'shoulders' => 2,
+                    'triceps' => 1
+                ],
+                'equipment' => 'Dumbbell',
+                'video_url' => 'https://youtube.com/inclinepress',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+
+            [
+                'name' => 'Push Up',
+                'description' => 'Bodyweight chest exercise',
+                'muscle_group' => [
+                    'chest' => 3,
+                    'triceps' => 2,
+                    'shoulders' => 1
+                ],
+                'equipment' => 'Bodyweight',
+                'video_url' => 'https://youtube.com/pushup',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+
+            [
+                'name' => 'Pull Up',
+                'description' => 'Upper body pulling movement',
+                'muscle_group' => [
+                    'back' => 3,
+                    'biceps' => 2,
+                    'shoulders' => 1
+                ],
+                'equipment' => 'Pull Up Bar',
+                'video_url' => 'https://youtube.com/pullup',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+
+            [
+                'name' => 'Barbell Row',
+                'description' => 'Compound back exercise',
+                'muscle_group' => [
+                    'back' => 3,
+                    'biceps' => 2,
+                    'shoulders' => 1
+                ],
+                'equipment' => 'Barbell',
+                'video_url' => 'https://youtube.com/barbellrow',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+
             [
                 'name' => 'Shoulder Press',
-                'description' => 'Shoulder strength exercise',
-                'muscle_group' => 'Shoulders',
+                'description' => 'Compound shoulder pressing exercise',
+                'muscle_group' => [
+                    'shoulders' => 3,
+                    'triceps' => 2,
+                    'chest' => 1
+                ],
                 'equipment' => 'Dumbbell',
                 'video_url' => 'https://youtube.com/shoulderpress',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
+
             [
-                'name' => 'Squat',
-                'description' => 'Leg compound exercise',
-                'muscle_group' => 'Legs',
+                'name' => 'Lateral Raise',
+                'description' => 'Isolation exercise for shoulders',
+                'muscle_group' => [
+                    'shoulders' => 3
+                ],
+                'equipment' => 'Dumbbell',
+                'video_url' => 'https://youtube.com/lateralraise',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+
+            [
+                'name' => 'Barbell Squat',
+                'description' => 'Compound lower body exercise',
+                'muscle_group' => [
+                    'quadriceps' => 3,
+                    'glutes' => 2,
+                    'hamstrings' => 1
+                ],
                 'equipment' => 'Barbell',
                 'video_url' => 'https://youtube.com/squat',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
+
             [
                 'name' => 'Lunges',
-                'description' => 'Leg balance exercise',
-                'muscle_group' => 'Legs',
-                'equipment' => 'Bodyweight',
+                'description' => 'Single leg lower body exercise',
+                'muscle_group' => [
+                    'quadriceps' => 3,
+                    'glutes' => 2,
+                    'hamstrings' => 1
+                ],
+                'equipment' => 'Dumbbell',
                 'video_url' => 'https://youtube.com/lunges',
-
                 'created_at' => now(),
                 'updated_at' => now()
             ],
-            [
-                'name' => 'Jump Rope',
-                'description' => 'Cardio warmup exercise',
-                'muscle_group' => 'Full Body',
-                'equipment' => 'Jump Rope',
-                'video_url' => 'https://youtube.com/jumprope',
 
+            [
+                'name' => 'Bicep Curl',
+                'description' => 'Isolation exercise for biceps',
+                'muscle_group' => [
+                    'biceps' => 3
+                ],
+                'equipment' => 'Dumbbell',
+                'video_url' => 'https://youtube.com/bicepcurl',
                 'created_at' => now(),
                 'updated_at' => now()
-            ]
-        ]);
+            ],
+
+        ];
+
+        foreach ($exercises as $exercise) {
+            Exercise::create($exercise);
+        }
     }
 }

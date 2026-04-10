@@ -30,6 +30,37 @@ class Routine extends Model
         'deleted_at' => 'datetime',
     ];
 
+    protected $appends= [
+        'exercises',
+    ];
+
+    public function getExercisesAttribute()
+{
+    return $this->exercises()
+        ->select(
+            'exercises.id',
+            'exercises.name',
+            'exercises.description',
+            'exercises.muscle_group',
+            'exercises.equipment',
+            'exercises.video_url'
+        )
+        ->get()
+        ->map(function ($exercise) {
+            return [
+                'id' => $exercise->id,
+                'name' => $exercise->name,
+                'description' => $exercise->description,
+                'muscle_group' => $exercise->muscle_group,
+                'equipment' => $exercise->equipment,
+                'video_url' => $exercise->video_url,
+                'repetitions' => $exercise->pivot->repetitions,
+                'sets' => $exercise->pivot->sets,
+                'rest_time' => $exercise->pivot->rest_time
+            ];
+        });
+}
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -37,6 +68,8 @@ class Routine extends Model
 
     public function exercises()
     {
-        return $this->hasMany(Exercise::class);
+        return $this->belongsToMany(Exercise::class, 'exercise_details')
+            ->withPivot('repetitions', 'sets', 'rest_time')
+            ->withTimestamps();
     }
 }
